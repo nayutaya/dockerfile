@@ -22,7 +22,7 @@ RUN apt-get update \
     wget \
   && rm --recursive --force /var/lib/apt/lists/*
 ARG OPENCV_VERSION=2.4.13.7
-RUN mkdir -p /tmp/opencv \
+RUN mkdir --parents /tmp/opencv \
   && cd /tmp/opencv/ \
   && wget --quiet https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
   && unzip ${OPENCV_VERSION}.zip -d . \
