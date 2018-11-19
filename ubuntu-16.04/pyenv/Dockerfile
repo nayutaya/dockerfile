@@ -10,4 +10,9 @@ RUN apt-get update \
 RUN git clone https://github.com/riywo/anyenv ~/.anyenv \
   && echo 'export PATH="${HOME}/.anyenv/bin:${PATH}"' >> ~/.bash_profile \
   && echo 'eval "$(anyenv init -)"' >> ~/.bash_profile
-RUN /bin/bash --login -c "anyenv install pyenv"
+
+SHELL ["/bin/bash", "--login", "-c"]
+
+RUN anyenv install pyenv
+
+ENTRYPOINT ["/bin/bash", "--login", "-c"]
