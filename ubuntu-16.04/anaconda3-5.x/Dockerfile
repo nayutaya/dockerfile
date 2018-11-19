@@ -10,8 +10,13 @@ RUN apt-get update \
 RUN git clone https://github.com/riywo/anyenv ~/.anyenv \
   && echo 'export PATH="${HOME}/.anyenv/bin:${PATH}"' >> ~/.bash_profile \
   && echo 'eval "$(anyenv init -)"' >> ~/.bash_profile
-RUN /bin/bash --login -c "anyenv install pyenv"
+
+SHELL ["/bin/bash", "--login", "-c"]
+
+RUN anyenv install pyenv
 
 ARG PYTHON_VERSION=anaconda3-5.2.0
-RUN /bin/bash --login -c "pyenv install ${PYTHON_VERSION}"
-RUN /bin/bash --login -c "pyenv global ${PYTHON_VERSION}"
+RUN pyenv install ${PYTHON_VERSION} \
+  && pyenv global ${PYTHON_VERSION}
+
+ENTRYPOINT ["/bin/bash", "--login", "-c"]
